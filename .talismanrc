@@ -1,0 +1,6 @@
+fileignoreconfig:
+- filename: package-lock.json
+  checksum: 0c9cd06d94b15cb3394d70ce73395ad547b267a74599617266e302c74d07c60b
+- filename: components/ExpensesOutput/ExpensesList.js
+  checksum: 4cfa1315afc9eb8fe12798cf677cc4fee974ccd2f96bed9a188b36fa18cd41fa
+version: ""
