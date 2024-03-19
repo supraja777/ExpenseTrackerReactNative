@@ -4,3 +4,8 @@ fileignoreconfig:
 - filename: components/ExpensesOutput/ExpensesList.js
   checksum: 4cfa1315afc9eb8fe12798cf677cc4fee974ccd2f96bed9a188b36fa18cd41fa
 version: ""
+
+fileignoreconfig:
+- filename: components/ManageExpense/ExpenseForm.js
+  checksum: d3e894a6936adea8eeef86df07bed6347b6abfd4e20a5bfbe924a9bd0bbf2ccb
+version: ""
