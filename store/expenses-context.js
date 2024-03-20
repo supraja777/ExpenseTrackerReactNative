@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const ExpensesContext = createContext({
   expenses: [],
+  setExpenses: ((expenses) => {}),
   addExpense: ({ description, amount, date }) => {},
   deleteExpense: (id) => {},
   updateExpense: (id, { description, amount, date }) => {},
@@ -10,8 +11,11 @@ export const ExpensesContext = createContext({
 function expensesReducer(state, action) {
   switch (action.type) {
     case "ADD":
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state];
+      return [ action.payload, ...state];
+
+    case "SET":
+      const invertedArray = action.payload.reverse()
+      return invertedArray;
 
     case "UPDATE":
       const updatableIndex = state.findIndex(
@@ -32,93 +36,12 @@ function expensesReducer(state, action) {
 }
 
 function ExpensesContextProvider({ children }) {
-  const DUMMY_EXPENSES = [
-    {
-      id: "e1",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2024-3-19"),
-    },
-    {
-      id: "e2",
-      description: "Coursera course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e3",
-      description: "Shoe",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e4",
-      description: "Book",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e5",
-      description: "Dress",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e6",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e7",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e8",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e9",
-      description: "Coursera course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e10",
-      description: "Shoe",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e11",
-      description: "Book",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e12",
-      description: "Dress",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e13",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-    {
-      id: "e14",
-      description: "Udemy course",
-      amount: 872,
-      date: new Date("2021-12-19"),
-    },
-  ];
-  const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
+  
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
+
+  function setExpenses(expenses) {
+    dispatch({type: 'SET', payload: expenses})
+  }
 
   function addExpense(expenseData) {
     dispatch({ type: "ADD", payload: expenseData });
@@ -132,7 +55,7 @@ function ExpensesContextProvider({ children }) {
     dispatch({ type: "UPDATE", payload: { id, data: expenseData } });
   }
 
-  const value = {expenses: expensesState, addExpense: addExpense, deleteExpense: deleteExpense, updateExpense: updateExpense }
+  const value = {expenses: expensesState, addExpense: addExpense, deleteExpense: deleteExpense, updateExpense: updateExpense, setExpenses: setExpenses }
 
   return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>;
 }

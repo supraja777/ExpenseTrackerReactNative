@@ -9,3 +9,8 @@ fileignoreconfig:
 - filename: components/ManageExpense/ExpenseForm.js
   checksum: d3e894a6936adea8eeef86df07bed6347b6abfd4e20a5bfbe924a9bd0bbf2ccb
 version: ""
+
+fileignoreconfig:
+- filename: package-lock.json
+  checksum: 52b119a3cd8daa189518e2acb82c0300fd381c275b7dde930d9c9e51c722cd9a
+version: ""
